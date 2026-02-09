@@ -167,6 +167,30 @@ class Reviewer(Mentor):
         result = f'Имя: {self.name}\nФамилия: {self.surname}'
         return result
 
+def avg_student_course(students, course):
+    sum = 0
+    count = 0
+    for student in students:
+        if student.grades.get(course) != None:
+            for grade in student.grades.get(course):
+                sum += int(grade)
+            count += len(student.grades.get(course))
+    if count != 0:
+        return sum / count
+    return 0
+
+def avg_lecturer_course(lecturers, course):
+    sum = 0
+    count = 0
+    for lecturer in lecturers:
+        if lecturer.grades.get(course) != None:
+            for grade in lecturer.grades.get(course):
+                sum += int(grade)
+            count += len(lecturer.grades.get(course))
+    if count != 0:
+        return sum / count
+    return 0
+
 
 
 print(f"---------------- Инициализация  двух студентов ----------------------")
@@ -226,7 +250,7 @@ print(reviewer1.rate_hw(student1,'Python', 10))                                 
 print(reviewer2.rate_hw(student1,'Git', 9))                                      # None
 print(reviewer1.rate_hw(student1,'Python', 10))                                  # None
 print(reviewer1.rate_hw(student1,'Ручное тестирование Веб-приложений', 8))       # Ошибка
-print(reviewer2.rate_hw(student2,'Git', 9))                                      # None
+print(reviewer2.rate_hw(student2,'Git', 8))                                      # None
 print(reviewer2.rate_hw(student1,'Ручное тестирование Веб-приложений', 8))       # Ошибка
 print(student1.grades)
 print(student2.grades)
@@ -236,6 +260,21 @@ print("------------------------------")
 print(student2)
 # compare
 print(student1 == student2) # False
+print(student1 != student2) # True
+print(student1 >= student2) # True
 print(student1 > student2)  # True
+print(student1 <= student2) # False
+print(student1 < student2)  # False
+print("------------------------------")
+print(lecturer1 == lecturer2) # False
 print(lecturer1 != lecturer2) # True
 print(lecturer2 <= lecturer1) # False
+print(lecturer2 < lecturer1) # False
+print(lecturer2 >= lecturer1) # True
+print(lecturer2 > lecturer1) # True
+
+list_student = [student1, student2]
+print(avg_student_course(list_student,'Git'))
+
+list_lecturer = [lecturer1, lecturer2]
+print(avg_lecturer_course(list_lecturer,'Git'))
