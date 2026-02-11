@@ -11,7 +11,7 @@ class Student:
         self.grades = {}
 
 # Add finished courses
-    def add_courses(self, course_name): 
+    def add_course(self, course_name):
         self.finished_courses.append(course_name)
 
 # Grading lecturers
@@ -22,18 +22,18 @@ class Student:
             else:
                 lecturer.grades[course] = [grade]
         else:
-            return 'Ошибка'
+            return None
 
 # Average score calculation
     def avg_grade(self):
-        sum = 0
-        count = 0
+        sum_grade = 0
+        count_grade = 0
         for grade_list in self.grades.values():
             for grade in grade_list:
-                sum += int(grade)
-                count += 1
-        if count > 0:
-            result = sum / count
+                sum_grade += int(grade)
+                count_grade += 1
+        if count_grade > 0:
+            result = sum_grade / count_grade
         else:
             result = 0
         return result
@@ -52,12 +52,6 @@ class Student:
             return self.avg_grade() == other.avg_grade()
         return False
 
-    # Comparison !=
-    def __ne__(self, other):
-        if isinstance(other, Student):
-            return self.avg_grade() != other.avg_grade()
-        return False
-
     # Comparison <
     def __lt__(self, other):
         if isinstance(other, Student):
@@ -68,18 +62,6 @@ class Student:
     def __le__(self, other):
         if isinstance(other, Student):
             return self.avg_grade() <= other.avg_grade()
-        return False
-
-    # Comparison >
-    def __gt__(self, other):
-        if isinstance(other, Student):
-            return self.avg_grade() > other.avg_grade()
-        return False
-
-    # Comparison >=
-    def __ge__(self, other):
-        if isinstance(other, Student):
-            return self.avg_grade() >= other.avg_grade()
         return False
 
 
@@ -97,14 +79,14 @@ class Lecturer(Mentor):
 
     # Average score calculation
     def avg_grade(self):
-        sum = 0
-        count = 0
+        sum_grade = 0
+        count_grade = 0
         for grade_list in self.grades.values():
             for grade in grade_list:
-                sum += int(grade)
-                count += 1
-        if count > 0:
-            result = sum / count
+                sum_grade += int(grade)
+                count_grade += 1
+        if count_grade > 0:
+            result = sum_grade / count_grade
         else:
             result = 0
         return result
@@ -121,12 +103,6 @@ class Lecturer(Mentor):
             return self.avg_grade() == other.avg_grade()
         return False
 
-    # Comparison !=
-    def __ne__(self, other):
-        if isinstance(other, Lecturer):
-            return self.avg_grade() != other.avg_grade()
-        return False
-
     # Comparison <
     def __lt__(self, other):
         if isinstance(other, Lecturer):
@@ -139,17 +115,6 @@ class Lecturer(Mentor):
             return self.avg_grade() <= other.avg_grade()
         return False
 
-    # Comparison >
-    def __gt__(self, other):
-        if isinstance(other, Lecturer):
-            return self.avg_grade() > other.avg_grade()
-        return False
-
-    # Comparison >=
-    def __ge__(self, other):
-        if isinstance(other, Lecturer):
-            return self.avg_grade() >= other.avg_grade()
-        return False
 
 class Reviewer(Mentor):
     # Grading student
@@ -160,7 +125,7 @@ class Reviewer(Mentor):
             else:
                 student.grades[course] = [grade]
         else:
-            return 'Ошибка'
+            return None
 
     # Convert Reviewer to string
     def __str__(self):
@@ -168,27 +133,27 @@ class Reviewer(Mentor):
         return result
 
 def avg_student_course(students, course):
-    sum = 0
-    count = 0
+    sum_grade = 0
+    count_grade = 0
     for student in students:
         if student.grades.get(course) != None:
             for grade in student.grades.get(course):
-                sum += int(grade)
-            count += len(student.grades.get(course))
-    if count != 0:
-        return sum / count
+                sum_grade += int(grade)
+            count_grade += len(student.grades.get(course))
+    if count_grade != 0:
+        return sum_grade / count_grade
     return 0
 
 def avg_lecturer_course(lecturers, course):
-    sum = 0
-    count = 0
+    sum_grade = 0
+    count_grade = 0
     for lecturer in lecturers:
         if lecturer.grades.get(course) != None:
             for grade in lecturer.grades.get(course):
-                sum += int(grade)
-            count += len(lecturer.grades.get(course))
-    if count != 0:
-        return sum / count
+                sum_grade += int(grade)
+            count_grade += len(lecturer.grades.get(course))
+    if count_grade != 0:
+        return sum_grade / count_grade
     return 0
 
 
@@ -223,8 +188,8 @@ print("-----------------------------------------------------")
 # Adding courses students
 student1.courses_in_progress += ['Python', 'Git']
 student2.courses_in_progress += ['Git', 'Java']
-student1.add_courses('Ручное тестирование Веб-приложений')
-student2.add_courses('Ручное тестирование Веб-приложений')
+student1.add_course('Ручное тестирование Веб-приложений')
+student2.add_course('Ручное тестирование Веб-приложений')
 print(student1)
 print("------------------------------")
 print(student2)
